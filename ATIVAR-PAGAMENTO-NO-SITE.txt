@@ -1,0 +1,25 @@
+AZURE ACESSÓRIOS — ATIVAR PAGAMENTO DENTRO DO SITE
+
+1. No painel do Mercado Pago, abra a mesma aplicação usada pela loja.
+2. Entre em Credenciais de produção.
+3. Copie somente a Public Key de produção. Não envie nem publique o Access Token.
+4. Na Vercel, abra Settings > Environment Variables.
+5. Adicione:
+   Nome: MERCADO_PAGO_PUBLIC_KEY
+   Valor: a Public Key de produção copiada do Mercado Pago
+   Ambiente: Production
+6. Salve a variável.
+7. Atualize os arquivos do repositório no GitHub e aguarde a nova implantação da Vercel.
+8. Faça uma compra de teste controlada antes de divulgar a loja.
+
+COMO FICARÁ
+- Pagamento somente pelo Mercado Pago.
+- Pix dentro do site com 5% de desconto automático sobre os produtos.
+- Cartão dentro do site pelo formulário seguro do Mercado Pago.
+- O frete não recebe desconto.
+- O servidor recalcula produtos, estoque, entrega e desconto antes de cobrar.
+
+SEGURANÇA
+- O Access Token continua somente nas variáveis protegidas da Vercel.
+- A Public Key pode ser usada pelo formulário do navegador e não substitui o Access Token.
+- A Azure Acessórios não armazena número de cartão nem código de segurança.
