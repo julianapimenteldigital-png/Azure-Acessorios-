@@ -1,0 +1,17 @@
+body.mp-only .coupon,body.mp-only .hint,body.mp-only .whats,body.mp-only #discount{display:none!important}
+.paymentModal{position:fixed;z-index:60;inset:0;padding:18px;background:#071326d9;opacity:0;visibility:hidden;transition:.2s;overflow:auto}
+.paymentModal.open{opacity:1;visibility:visible}
+.paymentBox{position:relative;width:min(760px,100%);min-height:360px;margin:18px auto;padding:28px;background:#fff;border-radius:12px;box-shadow:0 24px 70px #0007}
+.paymentClose{position:absolute;right:18px;top:14px;width:42px;height:42px;border:0;border-radius:50%;background:#edf1f7;color:#1a3a6b;font-size:1.7rem;line-height:1}
+.paymentBox h2{margin:0 50px 6px 0;color:#1a3a6b;font:600 clamp(1.7rem,4vw,2.4rem) 'Playfair Display',serif}
+.paymentIntro{margin:0 50px 20px 0;color:#667085;font-size:.82rem}
+.paymentChoices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.paymentChoice{border:2px solid #dbe3ee;border-radius:10px;background:#fff;padding:16px;text-align:left;color:#1a3a6b}
+.paymentChoice b{display:block;font-size:.92rem}.paymentChoice span{display:block;margin-top:4px;color:#667085;font-size:.74rem}
+.paymentChoice.active{border-color:#1a3a6b;background:#f3f6fa}.paymentChoice.pix b{color:#198754}
+.paymentSummary{display:flex;justify-content:space-between;gap:12px;margin:14px 0;padding:12px 14px;background:#f8f5ef;color:#1a3a6b;font-size:.8rem}
+.paymentSummary strong{font-size:1rem}.paymentLoading,.paymentError{padding:22px;text-align:center;color:#667085}
+.paymentError{border:1px solid #e4b9b9;background:#fff5f5;color:#8a3030}
+#paymentBrick_container,#statusScreenBrick_container{min-height:120px}
+.paymentSecurity{margin:14px 0 0;color:#667085;text-align:center;font-size:.68rem}
+@media(max-width:620px){.paymentModal{padding:0}.paymentBox{min-height:100vh;margin:0;padding:22px 14px;border-radius:0}.paymentChoices{grid-template-columns:1fr}.paymentChoice{padding:13px}.paymentSummary{font-size:.72rem}}
