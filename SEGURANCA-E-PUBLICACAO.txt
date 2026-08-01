@@ -1,0 +1,22 @@
+AZURE ACESSÓRIOS — SEGURANÇA E PUBLICAÇÃO
+
+1. Na Vercel, configure somente em Settings > Environment Variables:
+   MERCADO_PAGO_ACCESS_TOKEN
+   MERCADO_PAGO_ENV=production
+   MELHOR_ENVIO_TOKEN
+   MELHOR_ENVIO_ENV=production
+   MELHOR_ENVIO_USER_AGENT=Azure Acessorios (seu-email-de-contato)
+   SITE_URL=https://endereco-publicado-da-loja
+
+2. Nunca coloque tokens no index.html, em mensagens, no GitHub ou em arquivos enviados ao público.
+
+3. Depois de configurar as variáveis, faça um novo Deploy na Vercel.
+
+4. Antes de aceitar pedidos reais, faça uma compra de teste completa: carrinho, CEP, frete,
+   redirecionamento, pagamento e retorno ao site.
+
+5. Confirme cada venda no painel do Mercado Pago antes de separar ou enviar o pedido.
+
+6. O estoque exibido pelo site é um limite configurado no código, mas ainda não é baixado
+   automaticamente após cada venda. Para vendas simultâneas em maior volume, será necessário
+   adicionar banco de dados e notificação (webhook) de pagamentos.
