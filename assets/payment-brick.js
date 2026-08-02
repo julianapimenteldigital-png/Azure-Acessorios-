@@ -72,11 +72,11 @@
 
   async function destroyBricks() {
     if (window.paymentBrickController) {
-      await window.paymentBrickController.unmount().catch(() => {});
+      await Promise.resolve(window.paymentBrickController.unmount()).catch(() => {});
       window.paymentBrickController = null;
     }
     if (window.statusScreenBrickController) {
-      await window.statusScreenBrickController.unmount().catch(() => {});
+      await Promise.resolve(window.statusScreenBrickController.unmount()).catch(() => {});
       window.statusScreenBrickController = null;
     }
     paymentContainer.innerHTML = "";
@@ -184,7 +184,7 @@
       }, 15_000));
       const controller = await Promise.race([createBrick, timeout]);
       if (attempt !== renderAttempt) {
-        await controller.unmount().catch(() => {});
+        await Promise.resolve(controller.unmount()).catch(() => {});
         return;
       }
       window.paymentBrickController = controller;
