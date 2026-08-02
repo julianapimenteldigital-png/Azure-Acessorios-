@@ -124,7 +124,7 @@
     try {
       const builder = await getBuilder();
       const paymentMethods = mode === "pix"
-        ? { bankTransfer: "pix" }
+        ? { bankTransfer: "all" }
         : { creditCard: "all", debitCard: "all", prepaidCard: "all" };
       window.paymentBrickController = await builder.create("payment", "paymentBrick_container", {
         initialization: { amount: amountFor(mode) },
@@ -169,9 +169,10 @@
               reject();
             }
           }),
-          onError: () => {
+          onError: (brickError) => {
+            console.error("Mercado Pago Payment Brick", brickError);
             message.className = "paymentError";
-            message.textContent = "Não foi possível carregar esta opção. Feche e tente novamente.";
+            message.textContent = "Não foi possível carregar o Mercado Pago. Confira se a Public Key de produção está correta e tente novamente.";
             message.hidden = false;
           }
         }
