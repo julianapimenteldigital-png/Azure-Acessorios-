@@ -60,6 +60,7 @@
   const choices = [...modal.querySelectorAll("[data-pay-mode]")];
   let bricksBuilder;
   let activeMode = "pix";
+  let renderAttempt = 0;
 
   const money = (value) => R(Number(value));
   const productTotal = () => cart.reduce((sum, line) => sum + P[line.id].p * line.q, 0);
@@ -111,6 +112,7 @@
   }
 
   async function renderPayment(mode) {
+    const attempt = ++renderAttempt;
     activeMode = mode;
     choices.forEach((choice) => choice.classList.toggle("active", choice.dataset.payMode === mode));
     paymentLabel.textContent = mode === "pix" ? "Total no Pix (5% de desconto)" : "Total no cartão";
@@ -126,7 +128,7 @@
       const paymentMethods = mode === "pix"
         ? { bankTransfer: "all" }
         : { creditCard: "all", debitCard: "all", prepaidCard: "all" };
-      window.paymentBrickController = await builder.create("payment", "paymentBrick_container", {
+      const createBrick = builder.create("payment", "paymentBrick_container", {
         initialization: { amount: amountFor(mode) },
         customization: {
           paymentMethods,
@@ -177,7 +179,17 @@
           }
         }
       });
+      const timeout = new Promise((_, reject) => setTimeout(() => {
+        reject(new Error("O Mercado Pago demorou para responder. Confira as credenciais de produção na Vercel e tente novamente."));
+      }, 15_000));
+      const controller = await Promise.race([createBrick, timeout]);
+      if (attempt !== renderAttempt) {
+        await controller.unmount().catch(() => {});
+        return;
+      }
+      window.paymentBrickController = controller;
     } catch (error) {
+      if (attempt !== renderAttempt) return;
       message.className = "paymentError";
       message.textContent = error.message;
       message.hidden = false;
@@ -197,6 +209,7 @@
   }
 
   async function closePayment() {
+    renderAttempt += 1;
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     await destroyBricks();
